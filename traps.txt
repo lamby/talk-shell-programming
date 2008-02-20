@@ -5,9 +5,7 @@ user=$1
 
 rollback() {
    del_from_passwd $user || true
-   if [ -e /home/$user ]; then
-      rm -rf /home/$user
-   fi
+   test -e /home/$user && rm -rf /home/$user || true
    exit 1
 }
 

@@ -48,10 +48,12 @@
         \frame {
             \frametitle{Shell programming != Bash programming}
 
+            Firstly:
+
             \begin{itemize}
-                \item Bash is an implemention of a shell
-                \item There are lots of other shells out there
-                \item ..that are faster and better
+                \item Bash is an \emph{implemention} of a shell \pause
+                \item There are lots of other shells out there \pause
+                \item ..that are faster and better \pause
                 \item It makes a difference, dammit.
             \end{itemize}
         }
@@ -63,11 +65,13 @@
                 \lstinputlisting{benchmark.txt}
             \end{tiny}
 
+            \pause
+
             \begin{enumerate}
-                \item Dash -- 3 seconds
-                \item Ksh -- 12 seconds
-                \item Zsh -- 14 seconds
-                \item Bash -- 24 seconds
+                \item Dash -- 3 seconds \pause
+                \item Ksh -- 12 seconds \pause
+                \item Zsh -- 14 seconds \pause
+                \item Bash -- 24 seconds \pause
             \end{enumerate}
 
             (Poor benchmark; basically testing integer-string conversion)
@@ -77,11 +81,13 @@
         \frame {
             \frametitle{Why not just write scripts in X?}
 
+            \pause
+
             \begin{description}
-                \item[C] -- Simply re-implementing the UNIX tools
-                \item[Python] -- Python shell scripts are ugly
-                \item[Ruby] -- Ruby scripts are ugly
-                \item[Haskell] -- Only for Reddit karma and Linspire
+                \item[C] -- Simply re-implementing the UNIX tools \pause
+                \item[Python] -- Python shell scripts are ugly \pause
+                \item[Ruby] -- Ruby is ugly \pause
+                \item[Haskell] -- Only for Reddit karma and Linspire \pause
                 \item[Perl] -- Maybe
             \end{description}
         }
@@ -93,14 +99,14 @@
     \frame {
         \frametitle{Writing robust scripts}
 
-        Robust scripts:
+        Robust scripts: \pause
     
         \begin{itemize}
-            \item Handle errors gracefully
-            \item Are maintainable
-            \item Are portable
+            \item Handle errors gracefully \pause
+            \item Are maintainable \pause
+            \item Are portable \pause
             \begin{itemize}
-                \item Don't use untested/volatile semantics
+                \item Don't use untested/volatile semantics \pause
                 \item Helps maintainability
             \end{itemize}
         \end{itemize}
@@ -111,12 +117,12 @@
             \frametitle{\lstinline!set -e!}
 
             \begin{itemize}
-                \item Exits script if any statement returns with non-zero status:
+                \item Exits script if any statement returns with non-zero status: \pause
                     \begin{small}
                         \lstinputlisting{sete-example.txt}
                     \end{small}
-                \item Should be enabled on every script you write!
-                \item Exits with non-zero status itself - chain scripts together
+                \item Should be enabled on every script you write! \pause
+                \item Exits with non-zero status itself - chain scripts together \pause
                 \item Use \lstinline!stmt || true! when a command is allowed to fail
             \end{itemize}
         }
@@ -128,11 +134,13 @@
                     \begin{small}
                         \lstinputlisting{sete-example2.txt}
                     \end{small}
+                    \pause
                 \item Not inherited by subshells:
                     \begin{small}
                         \lstinputlisting{sete-example3.txt}
                     \end{small}
-                \item (These are more examples of general shell behaviour than \lstinline!set -e!)
+                \pause
+                \item These are more examples of general shell behaviour than \lstinline!set -e!
             \end{itemize}
         }
 
@@ -140,15 +148,15 @@
             \frametitle{\lstinline!set -u!}
 
             \begin{itemize}
-                \item Ensures statements return non-zero status when unset variable is used:
+                \item Ensures statements return non-zero status when unset variable is used: \pause
                     \begin{small}
                         \lstinputlisting{setu-example.txt}
                     \end{small}
-
-                \item Catches typos and logic errors
-                \item Use with `\lstinline!set -e!' so script fails when used
-                \item Programatically detect unset variables with `\lstinline!\$\{VAR:-\}!'
-                \item Useful for simple argument parsing - just reference `\lstinline!\$1!'
+                \pause
+                \item Catches typos and logic errors \pause
+                \item Use with `\lstinline!set -e!' so script fails when used \pause
+                \item Programatically detect unset variables with `\lstinline!\$\{VAR:-\}!' \pause
+                \item Useful for simple argument parsing - just reference `\lstinline!\$1!' and script will fail if unset! \pause
             \end{itemize}
         }
     \subsection{Traps and locks}
@@ -156,16 +164,16 @@
             \frametitle{Traps}
 
             \begin{itemize}
-                \item Specify a function to jump to when signal received
-                \item `\lstinline!DEBUG!' pseudo-signal received after every command
-                \item Extremely unportable semantics beyond simple usage!
+                \item Specify a function to jump to when a signal is received \pause
+                \item `\lstinline!DEBUG!' pseudo-signal received after every command \pause
+                \item Extremely unportable semantics beyond simple usage! \pause
                 \item Be especially careful doing things inside your trapped function
             \end{itemize}
         }
         \frame {
             \frametitle{Traps}
 
-            Implementing `transactional' behaviour:
+            Implementing `transactional' behaviour: \pause
 
             \begin{tiny}
                 \lstinputlisting{traps.txt}
@@ -174,7 +182,7 @@
         \frame {
             \frametitle{Locks}
 
-            Preventing (accidental) concurrent usage:
+            Preventing (accidental) concurrent usage: \pause
 
             \begin{tiny}
                 \lstinputlisting{locks.txt}
@@ -186,13 +194,13 @@
 
             \begin{itemize}
                 \item Using Bash specific syntax whilst using \lstinline!/bin/sh!
-                    is an instance of a Bashism.
-                \item Common examples:
+                    is an instance of a Bashism. \pause
+                \item Common examples: \pause
                 \begin{itemize}
-                    \item `\lstinline![[ test ]]!' -- use `\lstinline![ test ]!'
-                    \item `\lstinline!==!' in a test -- use `\lstinline!=!' instead
-                    \item `\lstinline!function!' to define a function
-                    \item `\lstinline!source filename!' -- use `\lstinline!. filename!'
+                    \item `\lstinline![[ test ]]!' -- use `\lstinline![ test ]!' \pause
+                    \item `\lstinline!==!' in a test -- use `\lstinline!=!' \pause
+                    \item `\lstinline!function!' to define a function \pause
+                    \item `\lstinline!source filename!' -- use `\lstinline!. filename!' \pause
                     \item `\lstinline!. command args!' (not supported)
                 \end{itemize}
             \end{itemize}
@@ -201,12 +209,12 @@
             \frametitle{Bashisms (cont.)}
                 
             \begin{itemize}
-                \item Less common examples:
+                \item Less common examples: \pause
                 \begin{itemize}
-                    \item '\lstinline!read!' without a variable
-                    \item Esoteric variable expansions (replacements, etc.)
+                    \item '\lstinline!read!' without a variable \pause
+                    \item Esoteric variable expansions (replacements, etc.) \pause
                 \end{itemize}
-                \item Also applies to Zsh! (Table-tennis operator)
+                \item Also applies to Zsh! (Table-tennis operator, etc.)
             \end{itemize}
         }
         \frame {
@@ -234,6 +242,8 @@
                 \end{itemize}
             \end{block} 
 
+            \pause
+
             Plus others..
         }
 
@@ -242,48 +252,51 @@
             \frametitle{Robust Makefiles}
 
             \begin{itemize}
-                \item Psuedo \lstinline!set -e!:
+                \item Psuedo \lstinline!set -e!: \pause
                 \begin{itemize}
                     \item Will fail on the third line:
                         \begin{tiny}
                             \lstinputlisting{makefiles-1.txt}
                         \end{tiny}
+                        \pause
                     \item But what about:
                         \begin{tiny}
                             \lstinputlisting{makefiles-2.txt}
                         \end{tiny}
+                    \pause
                     \item One solution is to add 'set -e' at the beginning of multi-line
                 \end{itemize}
-                \item No \lstinline!set -u!
-                \item \lstinline!\$(cmd)! already used, just ugly backticks
+                \item No \lstinline!set -u! \pause
+                \item \lstinline!\$(cmd)! already used, just ugly backticks \pause
                 \item Scope of shell variables limited to single line
             \end{itemize}
         }
-    \subsection{Misc}
+    \subsection{Misc.}
         \frame {
-            \frametitle{Misc}
+            \frametitle{Misc.}
             
             \begin{itemize}
-                \item Set \lstinline!\$PATH!
-                \item Set \lstinline!\$IFS!
-                \item Spaces in filenames
+                \item Set \lstinline!\$PATH! -- careful of trojans \pause
+                \item Set \lstinline!\$IFS! -- security considerations \pause
+                \item Spaces in filenames \pause
                 \begin{itemize}
-                    \item Can be dangerous!
-                    \item Experiment with \lstinline!strace -eexec -v! until you understand shell escaping
-                    \item Quoting variables is the usual solution
+                    \item Can be dangerous! \pause
+                    \item Experiment with \lstinline!strace -eexec -v! until you understand shell escaping \pause
+                    \item Quoting variables is the usual solution \pause
                 \end{itemize}
-                \item \lstinline!\$\{FOO\}! vs \lstinline!\$FOO!
+                \item \lstinline!\$\{FOO\}! vs \lstinline!\$FOO! \pause
              \end{itemize}
         }
 %
 
-\section{Toolbox}
+\section{Shell toolbox}
     \frame {
-            \frametitle{Toolbox}
-
+            \frametitle{Shell toolbox}
+            \pause
             \begin{itemize}
-                \item UNIX has a ``software tools'' philosophy
+                \item UNIX has a ``software tools'' philosophy \pause
                 \item Lots of smallish tools to perform a job
+                \item `Shell' programming without tools is either useless or brain-damaged
             \end{itemize}
     }
     \subsection{\lstinline!sed! \& \lstinline!awk!}
@@ -291,10 +304,10 @@
             \frametitle{\lstinline!sed!}
 
             \begin{itemize}
-                \item Stream editor
-                \item \lstinline!echo hello | sed -e 's/hello/hi/'!
-                \item Powerful, but obscure
-                \item Inline editing -- \lstinline!sed -i <expr> (<expr>)*!
+                \item The Stream EDitor \pause
+                \item \lstinline!echo hello | sed -e 's/hello/hi/'! \pause
+                \item Powerful, but obscure syntax \pause
+                \item Inline editing -- \lstinline!sed -i <expr> (<expr>)*! \pause
                 \item `\lstinline!-n!' mode -- \lstinline!sed -n 's/search/replace/p'!
             \end{itemize}
         }
@@ -302,10 +315,10 @@
             \frametitle{\lstinline!awk!}
 
             \begin{itemize}
-                \item Useful for record-oriented data
-                \item Lots of things are record-oriented
-                \item And even more things can be co-erced into being record-oriented!
-                \item \lstinline!cut -d: -f2! $\Leftrightarrow$ \lstinline!awk -F: '\{ print \$2 \}'!
+                \item Useful for record-oriented data \pause
+                \item Lots of things are record-oriented \pause
+                \item And even more things can be co-erced into being record-oriented! \pause
+                \item \lstinline!cut -d: -f2! $\Leftrightarrow$ \lstinline!awk -F: '\{ print \$2 \}'! \pause
                 \item \begin{small}
                     \lstinline!getent passwd | awk -F: '\$1 == "lamby" \{ print \$NF \}'!
                 \end{small}
@@ -315,7 +328,7 @@
             \frametitle{Emulating other commands with \lstinline!awk!}
 
             \begin{description}
-                \item[head] -- \lstinline!awk 'NR <= 10'!
+                \item[head] -- \lstinline!awk 'NR <= 10'! 
                 \item[grep] -- \lstinline!awk '/regex/'!
                 \item[wc -l] -- \lstinline!awk 'END \{ print NR \}'!
                 \item[grep -v] -- \lstinline_awk '!/regex/'_
@@ -336,8 +349,11 @@
             \frametitle{\lstinline!echo! \& \lstinline!printf!}
 
             \begin{itemize}
-                \item \lstinline!echo! is really fragile and non-portable
-                \item Use \lstinline!printf! for reliable behaviour
+                \item \lstinline!echo! is really fragile and non-portable \pause
+                \begin{itemize}
+                    \item \lstinline!-e! or \lstinline!-n! not actually defined! \pause
+                \end{itemize}
+                \item Use \lstinline!printf! for reliable behaviour \pause
                 \item \lstinline!printf! works well with \lstinline!xargs -L1! too
             \end{itemize}
         }
@@ -346,11 +362,12 @@
             \frametitle{Processing arguments}
 
             \begin{itemize}
-                \item Easy to extend a script to accept multiple arguments
+                \item Easy to extend a script to accept multiple arguments \pause
                 \item Existing script:
                     \begin{small}
                         \lstinputlisting{arguments-1.txt}
                     \end{small}
+                    \pause
                 \item Add \lstinline!while! and \lstinline!shift!:
                     \begin{small}
                         \lstinputlisting{arguments-2.txt}
@@ -363,12 +380,14 @@
             \frametitle{Local variables}
 
             \begin{itemize}
-                \item Denote variables local to a function with `\lstinline!local!'
+                \item Denote variables local to a function with `\lstinline!local!' \pause
                 \item Values do not persist across invokations:
                     \begin{tiny}
                         \lstinputlisting{local-vars.txt}
                     \end{tiny}
+                    \pause
                 \item Locals usually in lowercase and globals in uppercase
+                \pause
                 \item Does not imply any sort of scoping!
             \end{itemize}
         }
@@ -378,9 +397,9 @@
             \frametitle{\lstinline!find! and \lstinline!xargs!}
 
             \begin{itemize}
-                \item Really useful
-                \item .. but dangerous!
-                \item Avoid \lstinline!find -exec!
+                \item Really useful \pause
+                \item .. but dangerous! \pause
+                \item Avoid \lstinline!find -exec! \pause
                 \begin{itemize}
                     \item Don't forkbomb machines!
                 \end{itemize}
@@ -393,9 +412,8 @@
         \frametitle{Debugging}
 
         \begin{itemize}
-            \item Black art
-            \item Check syntax with `\lstinline!/bin/sh -n!'
-            \item Debug specifics with `\lstinline!set -x!' (turn off with `\lstinline!set +x!')
+            \item Check syntax with `\lstinline!/bin/sh -n!' \pause
+            \item Debug specifics with `\lstinline!set -x!' (turn off with `\lstinline!set +x!') \pause
             \item \lstinline!checkbashisms! by Yann Dirson and Julian Gilbey
                 (From \lstinline!devscripts! package on Debian - please port)
         \end{itemize}
