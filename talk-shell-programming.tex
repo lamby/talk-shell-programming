@@ -43,6 +43,91 @@
 
 %
 
+\section{Shell scripts}
+\subsection{Shell programming != Bash programming}
+    % Bash is buggy and slow. (Planet Debian)
+
+\subsection{Why not write in X?}
+    % C
+    % Python
+    % Haskell
+    % Ruby
+    % Perl
+
+%
+
+\section{Writing robust scripts}
+\subsection{set -e and set -u}
+    % set -e
+        % Example
+        % Caught in pipes
+        % When a command might fail
+        % In subshells (!)
+    % set -u
+        % Example
+        % Detecting unset variables under set -u
+\subsection{Traps and locks}
+    % Cleanup
+\subsection{Misc}
+    % Spaces in filenames
+    % ${FOO} vs $FOO
+    % Set PATH
+    % IFS
+\subsection{Bashisms}
+    % Variable expansions
+    % bashisms-superset.png
+    % bashisms-evil.png
+        % Syntax that is valid Bash AND Posix shell but has different semantics
+
+\subsection{Robust Makefiles}
+    % Psuedo set -e:
+        % Everyone knows that the following snippet will fail on the third line:
+        %   all:
+        %       echo "Hello, from the '$@' target"
+        %       false
+        % But what about:
+        %   all:
+        %       echo "foo"; false; echo "bar"
+        % Solution is to add 'set -e' at the beginning of multi-line.
+    % No set -u. Not yours.
+    % No $(cmd), just ugly ``
+
+%
+
+\section{Toolbox}
+\subsection{awk}
+    % Useful for 'record' oriented data
+    %   getent passwd
+    %
+    %  awk [-F "field-sep"] '
+    %     [ BEGIN { expr } ]
+    %     [ END { expr } ]
+    %     [[<condition>] { expr }]
+    %
+    % Use my example.
+    % Replicate existing commands
+\subsection{sed}
+    % Hacky stuff
+    % sed -i <expr> ( <expr> ) *
+    % sed -n 's/search/replace/p'
+\subsection{echo}
+    % Don't rely on anything there
+\subsection{Processing arguments}
+    % while / #? / shift
+\subsection{Local variables}
+    % local -a
+    % Scoping defined
+\subsection{find and xargs}
+    % find -exec looks nice, but don't forkbomb
+    % Use find -print0 | xargs -0
+\subsection{Debugging}
+    % Black art
+    % /bin/sh -n (noexec)
+    % set -x (turn off with set +x)
+    % Checkbashisms
+
+%
+
 \frame {
     \frametitle{Thanks!}
     WUGLUG contact information:
