@@ -1,6 +1,6 @@
 TEXFILE=talk-shell-programming.tex
 
-all: clean pdf
+all: pdf
 
 pdf:
 	pdflatex --shell-escape -interaction nonstopmode $(TEXFILE)

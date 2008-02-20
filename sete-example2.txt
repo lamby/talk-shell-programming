@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+ls -l /doesnotexist | grep -c "hello"
+echo "foo"

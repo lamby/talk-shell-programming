@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+user=$1
+
+rollback() {
+   del_from_passwd $user || true
+   if [ -e /home/$user ]; then
+      rm -rf /home/$user
+   fi
+   exit 1
+}
+
+trap rollback INT TERM EXIT
+
+add_to_passwd $user
+cp -a /etc/skel /home/$user
+chown $user /home/$user -R

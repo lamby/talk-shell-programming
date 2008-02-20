@@ -1,0 +1,3 @@
+all:
+	echo "Hello, from the '$@' target"
+	echo "foo"; false; echo "bar"

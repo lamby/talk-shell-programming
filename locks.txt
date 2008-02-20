@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+LOCKFILE=/tmp/my.lockfile
+
+if [ -e $LOCKFILE ]; then
+   echo "Critical section is already running, exiting..."
+   exit 1
+fi
+
+trap "rm -f $LOCKFILE; exit" INT TERM EXIT
+
+touch $LOCKFILE
+# critical section
+sleep 10s
+# end critical section

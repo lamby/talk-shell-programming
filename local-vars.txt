@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+fun() {
+	local foo;
+	foo=$((foo+1))
+	echo $foo
+}
+fun; fun; fun
